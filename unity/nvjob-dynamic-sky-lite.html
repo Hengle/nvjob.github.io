@@ -9,11 +9,11 @@
 <link rel="stylesheet" href="/res/style/bootstrap.min.css">
 <link rel="stylesheet" href="/res/style/navbar.css" type="text/css">
 <link rel="stylesheet" href="/res/style/style.css">
-<title>#NVJOB Dynamic Sky Lite (standard render). Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург.</title>
+<title>#NVJOB Dynamic Sky. Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург.</title>
 <meta name="description" content="This is not just a static skybox, but a dynamic sky (clouds move and change shape) that can be customized for any task. You can create any sky, under different weather, day and night sky, or even make a fantasy sky.">
-<meta property="og:title" content="#NVJOB Dynamic Sky Lite (standard render). Free Unity Asset.">
+<meta property="og:title" content="#NVJOB Dynamic Sky. Free Unity Asset.">
 <meta property="og:description" content="This is not just a static skybox, but a dynamic sky (clouds move and change shape) that can be customized for any task. You can create any sky, under different weather, day and night sky, or even make a fantasy sky.">
-<meta name="image" property="og:image" content="https://nvjob.github.io/repo/unity%20assets/dynamic%20sky%20lite%20sr/221/pic/9.jpg">
+<meta name="image" property="og:image" content="https://nvjob.github.io/repo/unity%20assets/dynamic-sky/pic/9.jpg">
 <meta property="og:url" content="https://nvjob.github.io/unity/nvjob-dynamic-sky-lite">
 <meta name="twitter:card" content="summary_large_image">
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151102873-1"></script>
@@ -47,10 +47,7 @@ gtag('config', 'UA-151102873-1');
 </nav>
 </div>
 <div class="topBanner">
-<div class="bannermob">
-<span id="typed" class="banner_top_arrow"></span>
-</div>
-<div class="bannerpc"><iframe width="100%" height="100%" src="/res/" frameborder="0" class="topBannerIn"></iframe></div>
+<div class="bannerdp"></div>
 </div>
 
 
@@ -60,7 +57,7 @@ gtag('config', 'UA-151102873-1');
 
 
 <div class="topnameblank">
-<h1>#NVJOB Dynamic Sky Lite (standard render)</h1>
+<h1>#NVJOB Dynamic Sky</h1>
 </div>
 
 <!------------------------------------------------->
@@ -69,108 +66,85 @@ gtag('config', 'UA-151102873-1');
 <div class="contentall">
 <div class="contentall-in">
 
-<video class="mbr-embedded-video" src="/repo/unity%20assets/dynamic%20sky%20lite%20sr/230/pic/1.vd4" width="1280" height="720" loop="true" autoplay="true" preload="metadata" muted="muted"></video>
+<video class="mbr-embedded-video" src="/repo/unity%20assets/dynamic-sky/pic/1.vd4" width="1280" height="720" loop="true" autoplay="true" preload="metadata" muted="muted"></video>
 
 <br/><br/>
 
-Simple and fast sky shader. <br/>
-The asset includes two shaders and a simple script. <br/>
+#NVJOB Dynamic Sky is a fast and easy shader for the sky and horizon, working on mobile and desktop platforms. This shader works in a non-standard way, the color range of the shader goes beyond the standard color range and is within the HDR. Therefore, to work on mobile platforms, you must enable HDR (by default, HDR is turned off).
+<br/><indent></indent>
 This is not just a static skybox, but a dynamic sky (clouds move and change shape) that can be customized for any task. You can create any sky, under different weather, day and night sky, or even make a fantasy sky.
 
-
 <br/><br/>
 
-Only Built-in Render Pipeline.<br>
-For Unity version of at least 2019.1.8 (64-bit)
-<br/>
-Current version 2.3
+<h3>Features:</h3>
+- The ability to create any sky.<br>
+- Works well on mobile platforms (HDR required).<br>
+- The sky can be baked in lighting and in reflection.<br>
+- Control the direction of Sky movement.<br>
+- Support for all functions in Forward Rendering and Deferred Rendering.<br>
+- Very high performance.
 
-<br/>
-
-<table class="downloadc"><tbody><tr>
-<td>
-<a href="/link/?url=https://assetstore.unity.com/packages/slug/152747" target="_blank">Download from Unity Asset Store</a>
-<a href="/link/?url=https://github.com/nvjob/NVJOB-Sky-Shader-simple-and-fast" target="_blank">Download from GitHub</a>
-<a href="/link/?url=https://github.com/nvjob/NVJOB-Sky-Shader-old-versions" target="_blank">Archive of previous versions</a>
-<a href="/reportaproblem/" target="_blank">Report a Problem / Issue Tracker / FAQ</a>
-</td>
-<td>
-<div class="downloadicon"></div>
-</td>
-</tr></tbody></table>
-
+<br><br>
 
 <h3>Information</h3>
 
-This shader does not work with SRP (HDRP, URP)!
-<br/><indent></indent>
+This shader does not work with SRP (HDRP, URP)!<br/>
+For the shader to work properly, a dome model with prepared UV is required (model of the dome is in the asset).<br/>
+There are examples in the asset that allow you to quickly understand how to use the "sky" in your project.<br/>
+If you use mobile platforms, enable HDR for proper operation (Project Settings / Graphics).<br/>
+I recommend importing this asset into a new project. Study the operation of the asset and copy the components you need to your project.
 
-There is an example in the asset that allows you to quickly understand how to use the "sky" in your project. For the shader to work properly, a dome model with prepared UV is required (model of the dome is in the asset).
+<br><br>
 
-<br/><br/>
-
-The movement of clouds is carried out using global shader variables: _SkyShaderUvX, _SkyShaderUvZ.
-
+For Unity version of at least 2019.1.8 (Built-in Render Pipeline)
 <br/>
-
-_SkyShaderUvX, _SkyShaderUvZ - Offset main texture (Sky shader).
-
-<br/><br/>
-
-
-
-<code class="prettyprint ">using UnityEngine;
-
-public class DynamicSkyLite : MonoBehaviour
-{
-    public float ssgUvRotateSpeed = 1;
-    public float ssgUvRotateDistance = 1;
-    public Transform player;
-    Vector2 ssgVector;
-    Transform tr;
-
-    private void Awake()
-    { 
-        ssgVector = Vector2.zero;
-        tr = transform;
-    }
-
-    void Update()
-    {
-        ssgVector = Quaternion.AngleAxis(Time.time * ssgUvRotateSpeed, Vector3.forward) * Vector2.one * ssgUvRotateDistance;
-        Shader.SetGlobalFloat("_SkyShaderUvX", ssgVector.x);
-        Shader.SetGlobalFloat("_SkyShaderUvZ", ssgVector.y);
-        tr.position = new Vector3(player.position.x, tr.position.y, player.position.z);
-    }
-}
-</code>
-
+Current version 2.5.1
 
 
 <br/>
 
 
-<img src="/repo/unity%20assets/dynamic%20sky%20lite%20sr/221/pic/3a.jpg" alt="#NVJOB Dynamic Sky Lite (standard render). Free Unity Asset." title="#NVJOB Dynamic Sky Lite (standard render). Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург."/>
+
+<table class="infoc"><tbody><tr><td>
+<a href="/instructions/nvjob-dynamic-sky-component-settings" target="_blank">Component Settings (Dynamic Sky)</a>
+<a href="/instructions/nvjob-dynamic-sky-shader-settings" target="_blank">Shader Settings (Dynamic Sky)</a>
+<a href="/instructions/nvjob-dynamic-sky-camera-settings" target="_blank">Settings Camera in Scene</a>
+<a href="/instructions/nvjob-dynamic-sky-ios-android" target="_blank">IOS and Android</a>
+<a href="/instructions/nvjob-dynamic-sky-first-start" target="_blank">First Start (video)</a>
+<a href="/web-demo//nvjob-dynamic-sky/" target="_blank">Web Demo</a>
+<a href="/reportaproblem/" target="_blank">Report a Problem</a>
+</td><td><div class="infoicon"></div></td></tr></tbody></table>
+
+
+
+<table class="downloadc"><tbody><tr><td>
+<a href="/link/?url=https://assetstore.unity.com/packages/slug/152747" target="_blank">Download from Unity Asset Store</a>
+<a href="/link/?url=https://github.com/nvjob/NVJOB-Sky-Shader-simple-and-fast" target="_blank">Download from GitHub</a>
+<a href="/link/?url=https://nvjob.itch.io/nvjob-dynamic-sky" target="_blank">Download from Itch.io</a>
+<a href="/link/?url=https://github.com/nvjob/NVJOB-Sky-Shader-old-versions" target="_blank">Archive of previous versions</a>
+</td><td><div class="downloadicon"></div></td></tr></tbody></table>
+
+
+
+
+<img src="/repo/unity%20assets/dynamic-sky/pic/5.jpg" alt="#NVJOB Dynamic Sky. Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург." title="#NVJOB Dynamic Sky. Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург."/>
 
 <br/><br/>
 
-<iframe style="width: 100%;" class="mbr-embedded-video" src="https://www.youtube.com/embed/8xBBqnpXuRY?rel=0&amp;showinfo=0&amp;autoplay=0&amp;loop=1&amp;playlist=8xBBqnpXuRY" width="1280" height="720" frameborder="0" allowfullscreen=""></iframe>
+<img src="/repo/unity%20assets/dynamic-sky/pic/7.jpg" alt="#NVJOB Dynamic Sky. Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург." title="#NVJOB Dynamic Sky. Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург."/>
 
 <br/><br/>
 
-<img src="/repo/unity%20assets/dynamic%20sky%20lite%20sr/221/pic/5.jpg" alt="#NVJOB Dynamic Sky Lite (standard render). Free Unity Asset." title="#NVJOB Dynamic Sky Lite (standard render). Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург."/>
+<img src="/repo/unity%20assets/dynamic-sky/pic/4.jpg" alt="#NVJOB Dynamic Sky. Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург." title="#NVJOB Dynamic Sky. Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург."/>
 
 <br/><br/>
 
-<img src="/repo/unity%20assets/dynamic%20sky%20lite%20sr/221/pic/7.jpg" alt="#NVJOB Dynamic Sky Lite (standard render). Free Unity Asset." title="#NVJOB Dynamic Sky Lite (standard render). Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург."/>
+<img src="/repo/unity%20assets/dynamic-sky/pic/6.jpg" alt="#NVJOB Dynamic Sky. Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург." title="#NVJOB Dynamic Sky. Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург."/>
 
 <br/><br/>
 
-<img src="/repo/unity%20assets/dynamic%20sky%20lite%20sr/221/pic/4.jpg" alt="#NVJOB Dynamic Sky Lite (standard render). Free Unity Asset." title="#NVJOB Dynamic Sky Lite (standard render). Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург."/>
+<iframe style="width: 100%;" class="mbr-embedded-video" src="https://www.youtube.com/embed/0fr-XKx6nzc?rel=0&amp;showinfo=0&amp;autoplay=0&amp;loop=1&amp;playlist=0fr-XKx6nzc" width="1280" height="720" frameborder="0" allowfullscreen=""></iframe>
 
-<br/><br/>
-
-<img src="/repo/unity%20assets/dynamic%20sky%20lite%20sr/221/pic/6.jpg" alt="#NVJOB Dynamic Sky Lite (standard render). Free Unity Asset." title="#NVJOB Dynamic Sky Lite (standard render). Free Unity Asset. #NVJOB Nicholas Veselov Unity Developer. Николай Веселов Unity Разработчик Санкт-Петербург."/>
 
 <br/>
 
@@ -192,7 +166,7 @@ This project is licensed under the <a href="https://nvjob.github.io/mit-license"
 
 
 <div class="bottomfooter">
-(C) Copyright 2016-2020 <a href="https://nvjob.github.io">#NVJOB</a>
+(C) Copyright 2016 #NVJOB. Contact: nvjob.dev@gmail.com
 <br/>
 <a href="https://nvjob.github.io" title="#NVJOB Nicholas Veselov Unity Developer">Nicholas Veselov Unity Game Developer</a>
 <br/>
